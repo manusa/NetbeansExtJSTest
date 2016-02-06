@@ -1,2 +1,2 @@
 # NetbeansExtJSTest
-Netbeans test using Gulp and ExtJS
+Netbeans test using Gulp and ExtJS.
