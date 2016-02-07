@@ -15,18 +15,19 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/*
 (function (Ext) {
-    function helloWorld() {
-        var win = new Ext.create('Ext.Window', {
-            id: 'helloWorldWindow',
-            title: 'Hello World!',
-            width: 300,
-            height: 150,
-            layout: 'fit'
-        });
-        win.show();
-    }
-    Ext.onReady(helloWorld);
+    //Unsupported in ExtJS
+    //"use strict";
+    Ext.define('GithubTest.Repository', {
+        extend: 'Ext.data.Model',
+        fields: [
+            'id',
+            'name',
+            'full_name',
+            {name: 'private', type: 'boolean'},
+            'html_url',
+            'watchers_count',
+            'forks_count'
+        ]
+    });
 })(Ext);
-*/

@@ -15,18 +15,23 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/*
 (function (Ext) {
-    function helloWorld() {
-        var win = new Ext.create('Ext.Window', {
-            id: 'helloWorldWindow',
-            title: 'Hello World!',
-            width: 300,
-            height: 150,
-            layout: 'fit'
-        });
-        win.show();
-    }
-    Ext.onReady(helloWorld);
+    Ext.define('GithubTest.RepositoryStore', {
+        extend: 'Ext.data.Store',
+        config: {
+            autoLoad:true,
+            model: 'GithubTest.Repository',
+            proxy: {
+                type: 'jsonp',
+                url: 'https://api.github.com/users/manusa/repos',
+                reader: {
+                    type: 'json',
+                    root:'data'
+                }
+            }
+        },
+        initComponent: function () {
+
+        }
+    });
 })(Ext);
-*/
