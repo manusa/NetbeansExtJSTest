@@ -22,6 +22,7 @@
         extend: 'Ext.grid.Panel',
         initComponent: function () {
             Ext.apply(this, {
+                title:"Github Repos",
                 /* Container css class*/
                 cls: 'grid-panel',
                 viewConfig: {

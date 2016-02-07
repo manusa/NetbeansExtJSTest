@@ -141,16 +141,18 @@
             return {region: 'north',
                 html: '<h1 class="x-panel-header">Github Repositories</h1>',
                 border: false,
-                margin: '0 0 5 0'};
+                margin: '0 0 0 0',
+                weight:1};
         },
         createGridPanel: function () {
             this.gridPanel = Ext.create('GithubTest.GridPanel', {
-                region: 'south',
+                layout:'fit',
+                region: 'center',
                 collapsible: true,
-                width: 225,
                 //floatable: false,
                 //split: true,
-                minWidth: 175
+                minWidth: 175,
+                weight:2
             });
             return this.gridPanel;
         }
@@ -187,6 +189,7 @@
         extend: 'Ext.grid.Panel',
         initComponent: function () {
             Ext.apply(this, {
+                title:"Github Repos",
                 /* Container css class*/
                 cls: 'grid-panel',
                 viewConfig: {
