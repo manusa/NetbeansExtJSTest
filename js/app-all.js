@@ -235,9 +235,15 @@
                 columns: [{
                         text: 'Full Name',
                         dataIndex: 'full_name',
-                        flex: 1/*,
-                         renderer: this.formatTitle*/
-                    }, {
+                        flex: 1
+                    },
+                    {
+                        text: 'Stars',
+                        dataIndex: 'watchers_count',
+                        hidden: false
+
+                    },
+                    {
                         text: 'Url',
                         dataIndex: 'html_url',
                         hidden: false,
@@ -280,10 +286,17 @@
         items: [
             {
                 xtype: 'textfield',
+                id: 'accessToken',
                 fieldLabel: 'Access token',
                 // The default config for textfield in a bind is "value" (two-way):
                 bind: '{globalData.githubToken}',
                 listeners: {
+                    render: function (c) {
+                        Ext.create('Ext.tip.ToolTip', {
+                            target: c.getEl(),
+                            html: 'Insert a OAuth token for identified Github API access'
+                        });
+                    },
                     specialkey: function (f, e) {
                         if (e.getKey() === e.ENTER) {
                             var store = Ext.getStore('repositoryStore');

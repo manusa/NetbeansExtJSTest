@@ -32,9 +32,15 @@
                 columns: [{
                         text: 'Full Name',
                         dataIndex: 'full_name',
-                        flex: 1/*,
-                         renderer: this.formatTitle*/
-                    }, {
+                        flex: 1
+                    },
+                    {
+                        text: 'Stars',
+                        dataIndex: 'watchers_count',
+                        hidden: false
+
+                    },
+                    {
                         text: 'Url',
                         dataIndex: 'html_url',
                         hidden: false,
