@@ -38,11 +38,15 @@
                         text: 'Url',
                         dataIndex: 'html_url',
                         hidden: false,
-                        width: 200
+                        width: 300,
+                        renderer: this.formatUrl
 
                     }]
             });
             this.callParent(arguments);
+        },
+        formatUrl: function (value) {
+            return Ext.String.format('<a href=\"{0}\" target=\"_blank\">{0}</a>', value);
         }
     });
 })(Ext);
