@@ -27,7 +27,22 @@
                 xtype: 'textfield',
                 fieldLabel: 'Access token',
                 // The default config for textfield in a bind is "value" (two-way):
-                bind: '{globalData.githubToken}'
+                bind: '{globalData.githubToken}',
+                listeners: {
+                    specialkey: function (f, e) {
+                        if (e.getKey() === e.ENTER) {
+                            var store = Ext.getStore('repositoryStore');
+                            var url = "https://api.github.com/users/manusa/repos";
+                            var accessToken = GitHubTest.GlobalData.get('githubToken');
+                            if(accessToken !== ''){
+                                url = url + "?access_token="+accessToken;
+                            }
+                            store.proxy.setUrl(url);
+                            store.load();
+
+                        }
+                    }
+                }
             }
         ]
     });
@@ -35,7 +50,7 @@
     Ext.define('GithubTest.TokenFormVM', {
         extend: 'Ext.app.ViewModel',
         alias: 'viewmodel.tokenformvm',
-        data: { 
+        data: {
             globalData: GitHubTest.GlobalData
         }
     });

@@ -65,7 +65,6 @@
     });
     Ext.onReady(initApp);
     function initApp() {
-        GitHubTest.GlobalData.set('githubToken','MockValue')
         var app = new GithubTest.App();
     }
 })(Ext);

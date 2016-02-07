@@ -79,10 +79,11 @@
         extend: 'Ext.data.Store',
         config: {
             autoLoad: true,
+            storeId:'repositoryStore',
             model: 'GithubTest.Repository',
             proxy: {
                 type: 'jsonp',
-                url: getGithubUrl(),
+                url: 'https://api.github.com/users/manusa/repos',
                 reader: {
                     type: 'json',
                     rootProperty: 'data'
@@ -91,7 +92,7 @@
         },
         initComponent: function () {
 
-        },
+        }
     });
     function getGithubUrl() {
         "use strict";
@@ -99,6 +100,40 @@
         return 'https://api.github.com/users/manusa/repos' +
                 (typeof auth !== 'undefined'? '?auth_token='+auth :'');
     }
+})(Ext);
+
+/* 
+ * Copyright (C) 2016 Marc Nuri <marc@marcnuri.com>
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+(function (Ext) {
+    //Unsupported in ExtJS
+    //"use strict";
+    Ext.define('GithubTest.Repository', {
+        extend: 'Ext.data.Model',
+        fields: [
+            'id',
+            'name',
+            'full_name',
+            {name: 'private', type: 'boolean'},
+            'html_url',
+            'watchers_count',
+            'forks_count'
+        ]
+    });
 })(Ext);
 
 /* 
@@ -197,7 +232,7 @@
         extend: 'Ext.grid.Panel',
         initComponent: function () {
             Ext.apply(this, {
-                title:"Github Repos",
+                title: "Github Repos",
                 /* Container css class*/
                 cls: 'grid-panel',
                 viewConfig: {
@@ -218,7 +253,7 @@
                     }]
             });
             this.callParent(arguments);
-        } 
+        }
     });
 })(Ext);
 /* 
@@ -250,7 +285,22 @@
                 xtype: 'textfield',
                 fieldLabel: 'Access token',
                 // The default config for textfield in a bind is "value" (two-way):
-                bind: '{globalData.githubToken}'
+                bind: '{globalData.githubToken}',
+                listeners: {
+                    specialkey: function (f, e) {
+                        if (e.getKey() === e.ENTER) {
+                            var store = Ext.getStore('repositoryStore');
+                            var url = "https://api.github.com/users/manusa/repos";
+                            var accessToken = GitHubTest.GlobalData.get('githubToken');
+                            if(accessToken !== ''){
+                                url = url + "?access_token="+accessToken;
+                            }
+                            store.proxy.setUrl(url);
+                            store.load();
+
+                        }
+                    }
+                }
             }
         ]
     });
@@ -258,43 +308,9 @@
     Ext.define('GithubTest.TokenFormVM', {
         extend: 'Ext.app.ViewModel',
         alias: 'viewmodel.tokenformvm',
-        data: { 
+        data: {
             globalData: GitHubTest.GlobalData
         }
     });
 })(Ext);
 
-
-/* 
- * Copyright (C) 2016 Marc Nuri <marc@marcnuri.com>
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-
-(function (Ext) {
-    //Unsupported in ExtJS
-    //"use strict";
-    Ext.define('GithubTest.Repository', {
-        extend: 'Ext.data.Model',
-        fields: [
-            'id',
-            'name',
-            'full_name',
-            {name: 'private', type: 'boolean'},
-            'html_url',
-            'watchers_count',
-            'forks_count'
-        ]
-    });
-})(Ext);

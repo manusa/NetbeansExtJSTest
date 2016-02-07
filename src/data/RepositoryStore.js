@@ -20,10 +20,11 @@
         extend: 'Ext.data.Store',
         config: {
             autoLoad: true,
+            storeId:'repositoryStore',
             model: 'GithubTest.Repository',
             proxy: {
                 type: 'jsonp',
-                url: getGithubUrl(),
+                url: 'https://api.github.com/users/manusa/repos',
                 reader: {
                     type: 'json',
                     rootProperty: 'data'
@@ -34,10 +35,4 @@
 
         }
     });
-    function getGithubUrl() {
-        "use strict";
-        var auth = GitHubTest.GlobalData.get('githubToken');
-        return 'https://api.github.com/users/manusa/repos' +
-                (typeof auth !== 'undefined'? '?auth_token='+auth :'');
-    }
 })(Ext);
