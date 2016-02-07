@@ -29,7 +29,10 @@
                     type: 'border',
                     padding: 5
                 },
-                items: [this.createTitle(), this.createGridPanel()]
+                items: [
+                    this.createTitle(),
+                    this.createGridPanel(),
+                    this.createTokenForm()]
             });
             this.callParent(arguments);
         },
@@ -38,25 +41,31 @@
                 html: '<h1 class="x-panel-header">Github Repositories</h1>',
                 border: false,
                 margin: '0 0 0 0',
-                weight:1};
+                weight: 1};
         },
         createGridPanel: function () {
             this.gridPanel = Ext.create('GithubTest.GridPanel', {
-                layout:'fit',
+                layout: 'fit',
                 region: 'center',
                 collapsible: true,
                 //floatable: false,
                 //split: true,
                 minWidth: 175,
-                weight:2
+                weight: 2
             });
             return this.gridPanel;
+        },
+        createTokenForm: function () {
+            this.tokenForm = Ext.create('GithubTest.TokenForm', {
+                layout: 'fit',
+                region: 'south'
+            });
+            return this.tokenForm;
         }
     });
     Ext.onReady(initApp);
     function initApp() {
+        GitHubTest.GlobalData.set('githubToken','MockValue')
         var app = new GithubTest.App();
-        var testStore = new GithubTest.RepositoryStore();
-        testStore.load();
     }
 })(Ext);

@@ -4,3 +4,4 @@ build/
 ext/
 /nbproject/private/
 /node_modules/
+secret/

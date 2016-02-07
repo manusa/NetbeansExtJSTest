@@ -16,28 +16,28 @@
  */
 
 (function (Ext) {
-    Ext.define('GithubTest.RepositoryStore', {
-        extend: 'Ext.data.Store',
-        config: {
-            autoLoad: true,
-            model: 'GithubTest.Repository',
-            proxy: {
-                type: 'jsonp',
-                url: getGithubUrl(),
-                reader: {
-                    type: 'json',
-                    rootProperty: 'data'
-                }
-            }
+    Ext.define('GithubTest.TokenForm', {
+        extend: 'Ext.panel.Panel',
+        title: 'Access Tokens',
+        viewModel: {
+            type: 'tokenformvm',
         },
-        initComponent: function () {
+        items: [
+            {
+                xtype: 'textfield',
+                fieldLabel: 'Access token',
+                // The default config for textfield in a bind is "value" (two-way):
+                bind: '{globalData.githubToken}'
+            }
+        ]
+    });
 
+    Ext.define('GithubTest.TokenFormVM', {
+        extend: 'Ext.app.ViewModel',
+        alias: 'viewmodel.tokenformvm',
+        data: { 
+            globalData: GitHubTest.GlobalData
         }
     });
-    function getGithubUrl() {
-        "use strict";
-        var auth = GitHubTest.GlobalData.get('githubToken');
-        return 'https://api.github.com/users/manusa/repos' +
-                (typeof auth !== 'undefined'? '?auth_token='+auth :'');
-    }
 })(Ext);
+

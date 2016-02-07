@@ -14,30 +14,13 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 (function (Ext) {
-    Ext.define('GithubTest.RepositoryStore', {
-        extend: 'Ext.data.Store',
-        config: {
-            autoLoad: true,
-            model: 'GithubTest.Repository',
-            proxy: {
-                type: 'jsonp',
-                url: getGithubUrl(),
-                reader: {
-                    type: 'json',
-                    rootProperty: 'data'
-                }
-            }
-        },
-        initComponent: function () {
-
-        }
+    Ext.define('GitHubTest.GlobalData', {
+        extend: 'Ext.data.Model',
+        singleton: true,
+        fields: [
+            'githubToken'
+        ]
     });
-    function getGithubUrl() {
-        "use strict";
-        var auth = GitHubTest.GlobalData.get('githubToken');
-        return 'https://api.github.com/users/manusa/repos' +
-                (typeof auth !== 'undefined'? '?auth_token='+auth :'');
-    }
 })(Ext);
+
