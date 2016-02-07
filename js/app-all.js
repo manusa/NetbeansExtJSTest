@@ -94,12 +94,6 @@
 
         }
     });
-    function getGithubUrl() {
-        "use strict";
-        var auth = GitHubTest.GlobalData.get('githubToken');
-        return 'https://api.github.com/users/manusa/repos' +
-                (typeof auth !== 'undefined'? '?auth_token='+auth :'');
-    }
 })(Ext);
 
 /* 
@@ -203,7 +197,6 @@
     });
     Ext.onReady(initApp);
     function initApp() {
-        GitHubTest.GlobalData.set('githubToken','MockValue')
         var app = new GithubTest.App();
     }
 })(Ext);
@@ -276,7 +269,7 @@
 (function (Ext) {
     Ext.define('GithubTest.TokenForm', {
         extend: 'Ext.panel.Panel',
-        title: 'Access Tokens',
+        title: 'Github Repository list options',
         viewModel: {
             type: 'tokenformvm',
         },

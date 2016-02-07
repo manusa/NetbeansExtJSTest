@@ -18,7 +18,7 @@
 (function (Ext) {
     Ext.define('GithubTest.TokenForm', {
         extend: 'Ext.panel.Panel',
-        title: 'Access Tokens',
+        title: 'Github Repository list options',
         viewModel: {
             type: 'tokenformvm',
         },
