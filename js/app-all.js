@@ -48,23 +48,19 @@
  */
 
 (function (Ext) {
-    Ext.define('GithubTest.RepositoryStore', {
-        extend: 'Ext.data.Store',
-        config: {
-            autoLoad:true,
-            model: 'GithubTest.Repository',
-            proxy: {
-                type: 'jsonp',
-                url: 'https://api.github.com/users/manusa/repos',
-                reader: {
-                    type: 'json',
-                    root:'data'
-                }
-            }
-        },
-        initComponent: function () {
-
-        }
+    //Unsupported in ExtJS
+    //"use strict";
+    Ext.define('GithubTest.Repository', {
+        extend: 'Ext.data.Model',
+        fields: [
+            'id',
+            'name',
+            'full_name',
+            {name: 'private', type: 'boolean'},
+            'html_url',
+            'watchers_count',
+            'forks_count'
+        ]
     });
 })(Ext);
 
@@ -86,19 +82,23 @@
  */
 
 (function (Ext) {
-    //Unsupported in ExtJS
-    //"use strict";
-    Ext.define('GithubTest.Repository', {
-        extend: 'Ext.data.Model',
-        fields: [
-            'id',
-            'name',
-            'full_name',
-            {name: 'private', type: 'boolean'},
-            'html_url',
-            'watchers_count',
-            'forks_count'
-        ]
+    Ext.define('GithubTest.RepositoryStore', {
+        extend: 'Ext.data.Store',
+        config: {
+            autoLoad:true,
+            model: 'GithubTest.Repository',
+            proxy: {
+                type: 'jsonp',
+                url: 'https://api.github.com/users/manusa/repos',
+                reader: {
+                    type: 'json',
+                    rootProperty:'data'
+                }
+            }
+        },
+        initComponent: function () {
+
+        }
     });
 })(Ext);
 

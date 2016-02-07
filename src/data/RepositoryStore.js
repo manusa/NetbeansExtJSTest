@@ -26,7 +26,7 @@
                 url: 'https://api.github.com/users/manusa/repos',
                 reader: {
                     type: 'json',
-                    root:'data'
+                    rootProperty:'data'
                 }
             }
         },
