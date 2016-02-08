@@ -38,14 +38,7 @@
                     },
                     specialkey: function (f, e) {
                         if (e.getKey() === e.ENTER) {
-                            var store = Ext.getStore('repositoryStore');
-                            var url = "https://api.github.com/users/manusa/repos";
-                            var accessToken = GitHubTest.GlobalData.get('githubToken');
-                            if (accessToken !== '') {
-                                url = url + Ext.String.format("?access_token={0}", accessToken);
-                            }
-                            store.proxy.setUrl(url);
-                            store.load();
+                            Ext.getStore('repositoryStore').reload();
 
                         }
                     }
@@ -58,7 +51,7 @@
         extend: 'Ext.app.ViewModel',
         alias: 'viewmodel.tokenformvm',
         data: {
-            globalData: GitHubTest.GlobalData
+            globalData: GithubTest.GlobalData
         }
     });
 })(Ext);

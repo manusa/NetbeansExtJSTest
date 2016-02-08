@@ -15,12 +15,24 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 (function (Ext) {
-    Ext.define('GitHubTest.GlobalData', {
+    Ext.define('GithubTest.GlobalData', {
         extend: 'Ext.data.Model',
         singleton: true,
         fields: [
-            'githubToken'
-        ]
+            'githubToken',
+            {name: 'user', defaultValue: 'manusa'}
+        ],
+        generateUrl: function () {
+            var accessToken = this.get('githubToken');
+            var user = this.get('user');
+            var url = Ext.String.format(
+                    'https://api.github.com/users/{0}/repos{1}',
+                    user,
+                    (accessToken && accessToken !== '' ?
+                            Ext.String.format('?access_token={0}', accessToken) :
+                            ''));
+            return url;
+        }
     });
 })(Ext);
 

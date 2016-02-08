@@ -24,7 +24,7 @@
             model: 'GithubTest.Repository',
             proxy: {
                 type: 'jsonp',
-                url: 'https://api.github.com/users/manusa/repos',
+                url: GithubTest.GlobalData.generateUrl(),
                 reader: {
                     type: 'json',
                     rootProperty: 'data'
@@ -45,6 +45,10 @@
         },
         initComponent: function () {
 
+        },
+        reload: function () {
+            this.proxy.setUrl(GithubTest.GlobalData.generateUrl());
+            this.load();
         }
     });
 })(Ext);
