@@ -43,6 +43,26 @@
                         }
                     }
                 }
+            },{
+                xtype: 'textfield',
+                id: 'user',
+                fieldLabel: 'Github user',
+                // The default config for textfield in a bind is "value" (two-way):
+                bind: '{globalData.user}',
+                listeners: {
+                    render: function (c) {
+                        Ext.create('Ext.tip.ToolTip', {
+                            target: c.getEl(),
+                            html: 'Insert a OAuth token for identified Github API access'
+                        });
+                    },
+                    specialkey: function (f, e) {
+                        if (e.getKey() === e.ENTER) {
+                            Ext.getStore('repositoryStore').reload();
+
+                        }
+                    }
+                }
             }
         ]
     });

@@ -57,7 +57,7 @@
         },
         createTokenForm: function () {
             this.tokenForm = Ext.create('GithubTest.TokenForm', {
-                layout: 'fit',
+//                layout: 'fit',
                 region: 'south'
             });
             return this.tokenForm;
