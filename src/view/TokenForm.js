@@ -53,7 +53,7 @@
                     render: function (c) {
                         Ext.create('Ext.tip.ToolTip', {
                             target: c.getEl(),
-                            html: 'Insert a OAuth token for identified Github API access'
+                            html: 'Insert a valid Github user id'
                         });
                     },
                     specialkey: function (f, e) {
