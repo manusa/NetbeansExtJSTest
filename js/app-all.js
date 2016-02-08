@@ -79,7 +79,7 @@
         extend: 'Ext.data.Store',
         config: {
             autoLoad: true,
-            storeId:'repositoryStore',
+            storeId: 'repositoryStore',
             model: 'GithubTest.Repository',
             proxy: {
                 type: 'jsonp',
@@ -87,7 +87,19 @@
                 reader: {
                     type: 'json',
                     rootProperty: 'data'
+                },
+                listeners: {
+                    exception: function (proxy, response, operation) {
+                        debugger;
+                        Ext.Msg.alert("Error with data from server", operation.error);
+                    }
                 }
+            },
+            listeners: {
+                load: function (store, records, successful, operation, eOpts) {
+                    debugger;
+                }
+
             }
         },
         initComponent: function () {
